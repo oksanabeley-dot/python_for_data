@@ -1,10 +1,16 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 url = "data/movies_metadata.csv"
 
 # df = DataFrame
 df = pd.read_csv(url)
-
+# 1) Оголошення змінної url — задаємо шлях до CSV-файлу з даними ("data/movies_metadata.csv").
+# 2) Виклик pd.read_csv(url) — pandas читає вміст CSV за вказаним шляхом і перетворює його на DataFrame.
+# 3) Присвоєння результату змінній df — тепер df містить табличні дані (рядки й стовпці) з файлу.
+# 4) Далі з df можна робити інспекцію (наприклад, df.head(), df.info()), очищення, трансформації або аналіз.
+# 5) Зауваження: можливі помилки — FileNotFoundError (неправильний шлях), проблеми з кодуванням або пам'яттю при великих файлах; у таких випадках треба змінювати шлях, додавати параметри (encoding, low_memory) або читати частинами.
 # print(df.head())
 # df.info()
 # print(df.describe())
@@ -21,19 +27,35 @@ df = pd.read_csv(url)
 # Нові альтернативи старому варіанту
 # df.fillna({"tagline": "without tagline"}, inplace=True)
 df["tagline"] = df["tagline"].fillna("without tagline")
-
+#  – заповнюємо всі пропущені значення у стовпці 'tagline' текстом "without tagline".
 # print(df.tagline)
 
 # print(df.homepage)
-df.homepage = df.homepage.fillna("no homepage")
-print(df.homepage)
+# df.homepage = df.homepage.fillna("no homepage")
+# print(df.homepage)
 
-print(df["belongs_to_collection"])
-df.fillna({"belongs_to_collection": "{}"}, inplace=True)
-print(df["belongs_to_collection"])
+# print(df["belongs_to_collection"])
+# df.fillna({"belongs_to_collection": "{}"}, inplace=True)
+# print(df["belongs_to_collection"])
 
-df.info()
+# df.info()
 
-df.dropna(inplace=True)
-print(df.isnull().sum())
-df.info()
+# df.dropna(inplace=True)
+# print(df.isnull().sum())
+# df.info()
+# -----------------------------------------------------------------------------14.11.2025
+
+# print(df.genres)
+generes_counts = df["genres"].value_counts()
+# 
+plt.figure(figsize=(10, 6))
+sns.barplot(x=generes_counts.index[:10], y=generes_counts.values[:10])
+
+generes_counts.head(10).plot(kind='bar')
+plt.title('Top 10 Movie Genres')
+plt.xlabel('Genres')
+plt.ylabel('Number of Movies')
+plt.xticks(rotation=10)
+plt.show()
+
+
