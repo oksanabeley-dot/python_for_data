@@ -10,7 +10,7 @@ url = "data/movies_metadata.csv"
 df = pd.read_csv(url)
 
 # print(df.head())
-# df.info()   
+# df.info()
 # print(df.describe())
 # print(df.isnull().sum())
 
@@ -59,6 +59,7 @@ df['genres'] = df['genres'].apply(extract_genres)
 # print(df.genres)
 
 # genres_counts = df['genres'].value_counts()
+
 all_genres = df['genres'].explode()
 genres_counts = all_genres.value_counts()
 # print(genres_counts)
