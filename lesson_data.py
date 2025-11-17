@@ -5,6 +5,6 @@ sales = {
     "items_sold" : [500, 700, 800, 900, 1000, 1100],
     "new_customers" : [50, 80, 90, 100, 120, 150]
 }
-df = pd.DataFrame(sales, index=month_data)
+df = pd.DataFrame(bata=sales, index=month_data)
 print(df)
-
+vector(ve)
